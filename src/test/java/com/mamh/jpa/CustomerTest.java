@@ -55,6 +55,25 @@ public class CustomerTest {
         //customer.setId(123);
         Customer customer = entityManager.find(Customer.class, 1);
         entityManager.remove(customer);
+
+        //System.out.println(customer);
+
+        //entityManager.persist(customer);
+    }
+
+    @Test
+    public void testMerge() {
+        Customer customer = new Customer();
+        customer.setAge(12);
+        customer.setLastName("Tom......");
+        customer.setEmail("email.....");
+        customer.setBirth(new Date());
+        customer.setCreateTime(new Date());
+
+        Customer merge = entityManager.merge(customer);
+
+        System.out.println(customer);
+        System.out.println(merge);
     }
 
     @Test
