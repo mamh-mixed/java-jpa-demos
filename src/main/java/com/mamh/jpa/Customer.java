@@ -2,14 +2,19 @@ package com.mamh.jpa;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Table(name = "jpa_customer")
 @Entity
@@ -22,6 +27,7 @@ public class Customer {
     private Date createTime;
     private Date birth;
 
+    private Set<Order> orders = new HashSet<>();
 
     @Id
     @Column(name = "id")
@@ -80,6 +86,16 @@ public class Customer {
 
     public void setBirth(Date birth) {
         this.birth = birth;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id")
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 
     @Override

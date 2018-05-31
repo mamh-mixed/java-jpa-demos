@@ -36,6 +36,36 @@ public class CustomerTest {
     }
 
     @Test
+    public void testOneToMany1() {
+        Customer customer = entityManager.find(Customer.class, 7);
+        System.out.println(customer);
+
+    }
+
+    @Test
+    public void testOneToMany() {
+        Customer customer = new Customer();
+        customer.setAge(112);
+        customer.setLastName("zz");
+        customer.setEmail("zzzzz");
+        customer.setBirth(new Date());
+        customer.setCreateTime(new Date());
+
+        Order order = new Order();
+        order.setOderName("o-ff-1");
+        Order order1 = new Order();
+        order1.setOderName("o-ff-2");
+
+        customer.getOrders().add(order);
+        customer.getOrders().add(order1);
+
+        entityManager.persist(customer);
+        entityManager.persist(order);
+        entityManager.persist(order1);
+
+    }
+
+    @Test
     public void testManyToOne2() {
         Customer customer = entityManager.find(Customer.class, 6);
         entityManager.remove(customer);
@@ -64,8 +94,8 @@ public class CustomerTest {
         order.setOderName("o-ff-1");
         Order order1 = new Order();
         order1.setOderName("o-ff-2");
-        order.setCustomer(customer);
-        order1.setCustomer(customer);
+        //order.setCustomer(customer);
+        //order1.setCustomer(customer);
         entityManager.persist(customer);
 
         entityManager.persist(order);
