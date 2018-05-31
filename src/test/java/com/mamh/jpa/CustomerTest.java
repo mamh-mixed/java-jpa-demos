@@ -36,6 +36,43 @@ public class CustomerTest {
     }
 
     @Test
+    public void testManyToOne2() {
+        Customer customer = entityManager.find(Customer.class, 6);
+        entityManager.remove(customer);
+
+
+    }
+
+    @Test
+    public void testManyToOne1() {
+        Order order = entityManager.find(Order.class, 1);
+        System.out.println(order);
+    }
+
+    @Test
+    public void testManyToOne() {
+        //多对一映射关联关系
+        //一个customer可以有多个order。
+        Customer customer = new Customer();
+        customer.setAge(112);
+        customer.setLastName("b");
+        customer.setEmail("b");
+        customer.setBirth(new Date());
+        customer.setCreateTime(new Date());
+
+        Order order = new Order();
+        order.setOderName("o-ff-1");
+        Order order1 = new Order();
+        order1.setOderName("o-ff-2");
+        order.setCustomer(customer);
+        order1.setCustomer(customer);
+        entityManager.persist(customer);
+
+        entityManager.persist(order);
+        entityManager.persist(order1);
+    }
+
+    @Test
     public void testFind() {
         Customer customer = entityManager.find(Customer.class, 1);
         System.out.println(customer);
@@ -69,6 +106,22 @@ public class CustomerTest {
         customer.setEmail("email.....");
         customer.setBirth(new Date());
         customer.setCreateTime(new Date());
+
+        Customer merge = entityManager.merge(customer);
+
+        System.out.println(customer);
+        System.out.println(merge);
+    }
+
+    @Test
+    public void testMerge1() {
+        Customer customer = new Customer();
+        customer.setAge(12);
+        customer.setLastName("Tom......");
+        customer.setEmail("email..1111.000..");
+        customer.setBirth(new Date());
+        customer.setCreateTime(new Date());
+        customer.setId(100);
 
         Customer merge = entityManager.merge(customer);
 
