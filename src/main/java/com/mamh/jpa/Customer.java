@@ -81,4 +81,16 @@ public class Customer {
     public void setBirth(Date birth) {
         this.birth = birth;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", createTime=" + createTime +
+                ", birth=" + birth +
+                '}';
+    }
 }
