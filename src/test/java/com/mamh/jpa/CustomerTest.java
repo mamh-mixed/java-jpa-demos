@@ -35,6 +35,35 @@ public class CustomerTest {
         entityManagerFactory.close();
     }
 
+    /**
+     * 双向一对多关联关系
+     */
+    @Test
+    public void testOneToMany2() {
+        Customer customer = new Customer();
+        customer.setAge(112);
+        customer.setLastName("aa");
+        customer.setEmail("aa");
+        customer.setBirth(new Date());
+        customer.setCreateTime(new Date());
+
+        Order order = new Order();
+        order.setOderName("o-ff-1");
+        Order order1 = new Order();
+        order1.setOderName("o-ff-2");
+
+        customer.getOrders().add(order);
+        customer.getOrders().add(order1);
+        order1.setCustomer(customer);
+        order.setCustomer(customer);
+
+        entityManager.persist(customer);
+        entityManager.persist(order);
+        entityManager.persist(order1);
+
+    }
+
+
     @Test
     public void testOneToMany1() {
         Customer customer = entityManager.find(Customer.class, 7);

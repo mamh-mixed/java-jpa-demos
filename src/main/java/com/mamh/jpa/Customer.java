@@ -1,5 +1,6 @@
 package com.mamh.jpa;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -88,8 +89,7 @@ public class Customer {
         this.birth = birth;
     }
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "customer_id")
+    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.REMOVE},mappedBy = "customer")
     public Set<Order> getOrders() {
         return orders;
     }
