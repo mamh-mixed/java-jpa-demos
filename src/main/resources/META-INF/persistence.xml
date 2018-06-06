@@ -6,6 +6,8 @@
         <!-- 添加持久化类 -->
         <class>com.mamh.jpa.Customer</class>
         <class>com.mamh.jpa.Order</class>
+        <class>com.mamh.jpa.Department</class>
+        <class>com.mamh.jpa.Manager</class>
 
 
         <properties>

@@ -35,6 +35,35 @@ public class CustomerTest {
         entityManagerFactory.close();
     }
 
+    @Test
+    public void testOnetoOneFind1() {
+        Manager manager = entityManager.find(Manager.class, 1);
+        System.out.println(manager);
+        System.out.println(manager.getDeptartment());
+    }
+
+    @Test
+    public void testOnetoOneFind() {
+        Department department = entityManager.find(Department.class, 1);
+        System.out.println(department);
+        System.out.println(department.getManager());
+
+    }
+
+    @Test
+    public void testOnetoOneSave() {
+        Manager manager = new Manager();
+        manager.setMgrName("bright.ma");
+        Department department = new Department();
+        department.setDeptName("scm");
+        department.setManager(manager);
+        manager.setDeptartment(department);
+
+        //先保存不维护关联关系的那一方
+        entityManager.persist(manager);
+        entityManager.persist(department);
+    }
+
     /**
      * 双向一对多关联关系
      */
