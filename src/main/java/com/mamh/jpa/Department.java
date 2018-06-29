@@ -3,10 +3,12 @@ package com.mamh.jpa;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -41,8 +43,9 @@ public class Department {
      * 使用  @OneToOne 来映射1-1关联关系。
      * @return
      */
-    @JoinColumn(name = "manager_id", unique = true)
-    @OneToOne
+    //@JoinColumn(name = "manager_id", unique = true)
+    @PrimaryKeyJoinColumn(name = "id")
+    @OneToOne()
     public Manager getManager() {
         return manager;
     }

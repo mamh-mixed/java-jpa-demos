@@ -37,16 +37,19 @@ public class CustomerTest {
 
     @Test
     public void testOnetoOneFind1() {
-        Manager manager = entityManager.find(Manager.class, 1);
-        System.out.println(manager);
-        System.out.println(manager.getDeptartment());
+        //这里获取不维护关联关系的一方，这里 (fetch = FetchType.LAZY)设置不设置这个都是使用的左外链接。发送2条sql语句。
+
+        Manager manager = entityManager.find(Manager.class, 3);
+        System.out.println(manager.getMgrName());
+        System.out.println(manager.getDeptartment().getClass().getName());
     }
 
     @Test
     public void testOnetoOneFind() {
-        Department department = entityManager.find(Department.class, 1);
-        System.out.println(department);
-        System.out.println(department.getManager());
+        //加上    @OneToOne(fetch = FetchType.LAZY) 就不会使用左外链接了,这样只会发送一条sql语句。
+        Department department = entityManager.find(Department.class, 3);
+        System.out.println(department.getDeptName());
+        System.out.println(department.getManager().getClass().getName());
 
     }
 

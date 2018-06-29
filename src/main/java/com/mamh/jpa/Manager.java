@@ -2,6 +2,7 @@ package com.mamh.jpa;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -34,7 +35,7 @@ public class Manager {
         this.mgrName = mgrName;
     }
 
-    @OneToOne(mappedBy = "manager")
+    @OneToOne(mappedBy = "manager", fetch = FetchType.LAZY)
     public Department getDeptartment() {
         return deptartment;
     }
