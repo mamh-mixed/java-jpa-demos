@@ -8,6 +8,8 @@
         <class>com.mamh.jpa.Order</class>
         <class>com.mamh.jpa.Department</class>
         <class>com.mamh.jpa.Manager</class>
+        <class>com.mamh.jpa.Item</class>
+        <class>com.mamh.jpa.Category</class>
 
 
         <properties>

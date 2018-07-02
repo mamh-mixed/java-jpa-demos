@@ -36,6 +36,49 @@ public class CustomerTest {
     }
 
     @Test
+    public void testManyToManyFind() {
+//        Item item = entityManager.find(Item.class, 2);
+//        System.out.println(item.getItemName());
+//        System.out.println(item.getCategories().size());
+
+        Category category = entityManager.find(Category.class, 1);
+        System.out.println(category.getCategoryName());
+        System.out.println(category.getItems().size());
+    }
+
+    @Test
+    public void testManyToManySave() {
+        Item i1 = new Item();
+        i1.setItemName("i - 1");
+        Item i2 = new Item();
+        i2.setItemName("i - 2");
+
+
+        Category c1 = new Category();
+        c1.setCategoryName("c - 1");
+        Category c2 = new Category();
+        c2.setCategoryName("c - 2");
+
+        i1.getCategories().add(c1);
+        i1.getCategories().add(c2);
+
+        i2.getCategories().add(c1);
+        i2.getCategories().add(c2);
+
+        c1.getItems().add(i1);
+        c1.getItems().add(i2);
+
+        c2.getItems().add(i1);
+        c2.getItems().add(i2);
+
+        entityManager.persist(i1);
+        entityManager.persist(i2);
+        entityManager.persist(c1);
+        entityManager.persist(c2);
+    }
+
+
+    @Test
     public void testOnetoOneFind1() {
         //这里获取不维护关联关系的一方，这里 (fetch = FetchType.LAZY)设置不设置这个都是使用的左外链接。发送2条sql语句。
 
