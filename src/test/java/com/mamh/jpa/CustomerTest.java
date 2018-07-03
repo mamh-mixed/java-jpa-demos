@@ -1,6 +1,5 @@
 package com.mamh.jpa;
 
-import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.hibernate.jpa.QueryHints;
 import org.junit.After;
 import org.junit.Before;
@@ -40,13 +39,21 @@ public class CustomerTest {
     }
 
     @Test
+    public void testUpdate(){
+        String jsql = "update  Customer  c set c.lastName = ? where c.id = ?";
+        Query query = entityManager.createQuery(jsql);
+        query.setParameter(1, "aaa");
+        query.setParameter(2, 10);
+        query.executeUpdate();
+
+    }
+
+    @Test
     public void testSubQuery() {
         String jsql = "select o from Order  o where o.customer = (select c from  Customer c where c.lastName = ?)";
-
         Query query = entityManager.createQuery(jsql);
         query.setParameter(1, "aa");
         List list = query.getResultList();
-
         System.out.println(list);
     }
 
