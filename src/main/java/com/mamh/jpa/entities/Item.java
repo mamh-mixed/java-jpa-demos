@@ -1,4 +1,4 @@
-package com.mamh.jpa;
+package com.mamh.jpa.entities;
 
 
 import javax.persistence.Column;

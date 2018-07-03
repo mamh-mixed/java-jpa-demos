@@ -1,5 +1,11 @@
 package com.mamh.jpa;
 
+import com.mamh.jpa.entities.Category;
+import com.mamh.jpa.entities.Customer;
+import com.mamh.jpa.entities.Department;
+import com.mamh.jpa.entities.Item;
+import com.mamh.jpa.entities.Manager;
+import com.mamh.jpa.entities.Order;
 import org.hibernate.jpa.QueryHints;
 import org.junit.After;
 import org.junit.Before;

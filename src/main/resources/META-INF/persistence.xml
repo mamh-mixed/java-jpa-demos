@@ -4,12 +4,12 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- 添加持久化类 -->
-        <class>com.mamh.jpa.Customer</class>
-        <class>com.mamh.jpa.Order</class>
-        <class>com.mamh.jpa.Department</class>
-        <class>com.mamh.jpa.Manager</class>
-        <class>com.mamh.jpa.Item</class>
-        <class>com.mamh.jpa.Category</class>
+        <class>com.mamh.jpa.entities.Customer</class>
+        <class>com.mamh.jpa.entities.Order</class>
+        <class>com.mamh.jpa.entities.Department</class>
+        <class>com.mamh.jpa.entities.Manager</class>
+        <class>com.mamh.jpa.entities.Item</class>
+        <class>com.mamh.jpa.entities.Category</class>
 
         <!--
             配置二级缓存的策略
