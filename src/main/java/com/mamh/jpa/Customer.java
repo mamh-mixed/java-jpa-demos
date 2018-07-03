@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,6 +20,7 @@ import java.util.Set;
 
 @Table(name = "jpa_customer")
 @Entity
+@NamedQuery(name = "testNamedQuery", query = "select c from Customer c where c.id = ?")
 public class Customer {
     private Integer id;
     private String lastName;
@@ -29,6 +31,15 @@ public class Customer {
     private Date birth;
 
     private Set<Order> orders = new HashSet<>();
+
+
+    public Customer() {
+    }
+
+    public Customer(String lastName, int age) {
+        this.lastName = lastName;
+        this.age = age;
+    }
 
     @Id
     @Column(name = "id")
@@ -89,7 +100,7 @@ public class Customer {
         this.birth = birth;
     }
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.REMOVE},mappedBy = "customer")
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE}, mappedBy = "customer")
     public Set<Order> getOrders() {
         return orders;
     }
@@ -100,7 +111,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "\nCustomer{" +
                 "id=" + id +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +

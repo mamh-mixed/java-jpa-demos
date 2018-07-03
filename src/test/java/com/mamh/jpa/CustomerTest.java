@@ -8,7 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.Date;
+import java.util.List;
 
 public class CustomerTest {
 
@@ -34,6 +36,45 @@ public class CustomerTest {
         entityManager.close();
         entityManagerFactory.close();
     }
+
+    @Test
+    public void testNativeQuery() {
+        String sql = "SELECT age FROM jpa_customer WHERE id = ?";
+        Query query = entityManager.createNativeQuery(sql);
+        query.setParameter(1, 3);
+        List resultList = query.getResultList();
+        System.out.println(resultList);
+    }
+
+    @Test
+    public void testNamedQuery() {
+
+        Query query = entityManager.createNamedQuery("testNamedQuery");
+        query.setParameter(1, 3);
+        List resultList = query.getResultList();
+        System.out.println(resultList);
+
+
+    }
+
+    @Test
+    public void testJpql() {
+
+        String jpsql = "select new Customer(c.lastName,c.age) FROM Customer  c where c.age > ?";
+
+        Query query = entityManager.createQuery(jpsql);
+        query.setParameter(1, 1);
+        List resultList = query.getResultList();
+        System.out.println(resultList);
+
+    }
+
+    @Test
+    public void testCache() {
+        Customer customer0 = entityManager.find(Customer.class, 1);
+        Customer customer1 = entityManager.find(Customer.class, 1);
+    }
+
 
     @Test
     public void testManyToManyFind() {
