@@ -40,6 +40,17 @@ public class CustomerTest {
     }
 
     @Test
+    public void testSubQuery() {
+        String jsql = "select o from Order  o where o.customer = (select c from  Customer c where c.lastName = ?)";
+
+        Query query = entityManager.createQuery(jsql);
+        query.setParameter(1, "aa");
+        List list = query.getResultList();
+
+        System.out.println(list);
+    }
+
+    @Test
     public void testLeftOuterJoinFetch1() {
         String jsql = "from Customer  c left outer join  c.orders where c.id=?";
         //String jsql = "from Customer  c   where c.id=?";
