@@ -1,5 +1,6 @@
 package com.mamh.jpa;
 
+import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.hibernate.jpa.QueryHints;
 import org.junit.After;
 import org.junit.Before;
@@ -37,6 +38,24 @@ public class CustomerTest {
         entityManager.close();
         entityManagerFactory.close();
     }
+
+    @Test
+    public void testGroupBy() {
+        String jsql = "select o.customer FROM  Order o group by o.customer HAVING count(o.id)>2";
+        Query query = entityManager.createQuery(jsql);
+        List resultList = query.getResultList();
+        System.out.println(resultList);
+    }
+
+    @Test
+    public void testOrderBy() {
+        String jsql = "from Customer c where c.age > ? order by c.id asc";
+        Query query = entityManager.createQuery(jsql);
+        query.setParameter(1, 1);
+        List resultList = query.getResultList();
+        System.out.println(resultList);
+    }
+
 
     @Test
     public void testQueryCache() {
