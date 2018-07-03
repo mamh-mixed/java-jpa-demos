@@ -85,6 +85,24 @@ public class CustomerTest {
     }
 
     @Test
+    public void testCache1() {
+        Customer customer = entityManager.find(Customer.class, 3); //这里一级缓存为什么没有生效呢？？？？
+
+        System.out.println(customer.getLastName());
+        transaction.commit();
+        entityManager.close();
+        System.out.println("");
+
+        entityManager = entityManagerFactory.createEntityManager();
+        transaction = entityManager.getTransaction();
+        transaction.begin();
+
+        Customer customer1 = entityManager.find(Customer.class, 3);
+        System.out.println(customer1.getLastName());
+
+    }
+
+    @Test
     public void testCache() {
         Customer customer = entityManager.find(Customer.class, 3); //这里一级缓存为什么没有生效呢？？？？
 

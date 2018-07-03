@@ -1,5 +1,6 @@
 package com.mamh.jpa;
 
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+@Cacheable(true)
 @Table(name = "jpa_customer")
 @Entity
 @NamedQuery(name = "testNamedQuery", query = "select c from Customer c where c.id = ?")
