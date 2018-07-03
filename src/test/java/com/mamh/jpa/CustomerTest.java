@@ -40,6 +40,29 @@ public class CustomerTest {
     }
 
     @Test
+    public void testLeftOuterJoinFetch1() {
+        String jsql = "from Customer  c left outer join  c.orders where c.id=?";
+        //String jsql = "from Customer  c   where c.id=?";
+        Query query = entityManager.createQuery(jsql);
+        query.setParameter(1, 10);
+        List list = query.getResultList();
+
+        System.out.println(list);
+    }
+
+    @Test
+    public void testLeftOuterJoinFetch() {
+        String jsql = "from Customer  c left outer join fetch c.orders where c.id=?";
+        //String jsql = "from Customer  c   where c.id=?";
+        Query query = entityManager.createQuery(jsql);
+        query.setParameter(1, 10);
+        Customer customer = (Customer) query.getSingleResult();
+        System.out.println(customer.getLastName());
+        System.out.println(customer.getOrders().size());
+    }
+
+
+    @Test
     public void testGroupBy() {
         String jsql = "select o.customer FROM  Order o group by o.customer HAVING count(o.id)>2";
         Query query = entityManager.createQuery(jsql);
