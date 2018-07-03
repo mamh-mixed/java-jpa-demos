@@ -49,7 +49,7 @@ public class CustomerTest {
         System.out.println(resultList);
 
         //query = entityManager.createQuery(jpsql);  //默认是发送2条sql查询语句的
-        query = entityManager.createQuery(jpsql).setHint(QueryHints.HINT_CACHEABLE,true);  //默认是发送2条sql查询语句的
+        query = entityManager.createQuery(jpsql).setHint(QueryHints.HINT_CACHEABLE, true);  //默认是发送2条sql查询语句的
         query.setParameter(1, 1);
         resultList = query.getResultList();
         System.out.println(resultList);
@@ -67,18 +67,14 @@ public class CustomerTest {
 
     @Test
     public void testNamedQuery() {
-
         Query query = entityManager.createNamedQuery("testNamedQuery");
         query.setParameter(1, 3);
         List resultList = query.getResultList();
         System.out.println(resultList);
-
-
     }
 
     @Test
     public void testJpql() {
-
         String jpsql = "select new Customer(c.lastName,c.age) FROM Customer  c where c.age > ?";
 
         Query query = entityManager.createQuery(jpsql);
@@ -90,8 +86,14 @@ public class CustomerTest {
 
     @Test
     public void testCache() {
-        Customer customer0 = entityManager.find(Customer.class, 1);
-        Customer customer1 = entityManager.find(Customer.class, 1);
+        Customer customer = entityManager.find(Customer.class, 3); //这里一级缓存为什么没有生效呢？？？？
+
+        System.out.println(customer.getLastName());
+
+        System.out.println("");
+        Customer customer1 = entityManager.find(Customer.class, 3);
+        System.out.println(customer1.getLastName());
+
     }
 
 
