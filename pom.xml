@@ -11,8 +11,9 @@
 
     <properties>
         <spring.version>5.0.4.RELEASE</spring.version>
-    </properties>
 
+        <hibernate.version>4.3.11.Final</hibernate.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -134,7 +135,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.11.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
@@ -145,12 +146,12 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.3.11.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-c3p0</artifactId>
-            <version>4.3.11.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
@@ -164,7 +165,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-ehcache</artifactId>
-            <version>5.2.15.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
         <!--日志jar-->
         <dependency>

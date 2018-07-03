@@ -1,5 +1,6 @@
 package com.mamh.jpa;
 
+import org.hibernate.jpa.QueryHints;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +36,24 @@ public class CustomerTest {
         transaction.commit();
         entityManager.close();
         entityManagerFactory.close();
+    }
+
+    @Test
+    public void testQueryCache() {
+        String jpsql = "select new Customer(c.lastName,c.age) FROM Customer  c where c.age > ?";
+
+        //Query query = entityManager.createQuery(jpsql);
+        Query query = entityManager.createQuery(jpsql).setHint(QueryHints.HINT_CACHEABLE, true);
+        query.setParameter(1, 1);
+        List resultList = query.getResultList();
+        System.out.println(resultList);
+
+        //query = entityManager.createQuery(jpsql);  //默认是发送2条sql查询语句的
+        query = entityManager.createQuery(jpsql).setHint(QueryHints.HINT_CACHEABLE,true);  //默认是发送2条sql查询语句的
+        query.setParameter(1, 1);
+        resultList = query.getResultList();
+        System.out.println(resultList);
+
     }
 
     @Test
