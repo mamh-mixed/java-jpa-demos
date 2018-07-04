@@ -1,12 +1,10 @@
 package com.mamh.jpa.dao;
 
 import com.mamh.jpa.entities.Person;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Repository
 public class PersonDao {
 
     /**

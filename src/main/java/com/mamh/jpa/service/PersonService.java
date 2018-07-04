@@ -3,10 +3,8 @@ package com.mamh.jpa.service;
 import com.mamh.jpa.dao.PersonDao;
 import com.mamh.jpa.entities.Person;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
 public class PersonService {
 
     @Autowired
