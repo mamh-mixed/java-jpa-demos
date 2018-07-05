@@ -4,6 +4,7 @@ import com.mamh.jpa.service.PeopleService;
 import com.mamh.jpa.springdata.People;
 import com.mamh.jpa.springdata.PeopleJpaRepository;
 import com.mamh.jpa.springdata.PeoplePagingAndSortingRepository;
+import com.mamh.jpa.springdata.PeopleRepo;
 import com.mamh.jpa.springdata.PeopleRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +32,7 @@ public class SpringDataTest {
     private PeopleService peopleService;
     private PeoplePagingAndSortingRepository peoplePagingAndSortingRepository;
     private PeopleJpaRepository peopleJpaRepository;
+    private PeopleRepo peopleRepo;
 
     @Before
     public void init() {
@@ -41,6 +43,12 @@ public class SpringDataTest {
 
         peopleService = context.getBean(PeopleService.class);
 
+        peopleRepo = context.getBean(PeopleRepo.class);
+    }
+
+    @Test
+    public void testPeopleDao(){
+          peopleRepo.test();
     }
 
     @Test
