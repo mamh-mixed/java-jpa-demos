@@ -1,5 +1,6 @@
 package com.mamh.jpa.springdata;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
@@ -46,4 +47,8 @@ public interface PeopleRepository extends Repository<People, Integer> {
 
     @Query(value = "select count(id) from  jpa_people",nativeQuery = true)
     Long getTotal();
+
+    @Modifying
+    @Query("update People  p set p.email = :email where  p.id = :id")
+    void updatePeopleEmail(@Param("id") Integer id,@Param("email") String email);
 }

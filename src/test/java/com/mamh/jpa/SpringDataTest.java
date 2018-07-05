@@ -1,5 +1,6 @@
 package com.mamh.jpa;
 
+import com.mamh.jpa.service.PeopleService;
 import com.mamh.jpa.springdata.People;
 import com.mamh.jpa.springdata.PeopleRepository;
 import org.junit.Before;
@@ -14,13 +15,20 @@ public class SpringDataTest {
 
     private ApplicationContext context = null;
     private PeopleRepository peopleRepository;
+    private PeopleService peopleService;
 
     @Before
     public void init() {
         context = new ClassPathXmlApplicationContext("spring.xml");
         peopleRepository = context.getBean(PeopleRepository.class);
+        peopleService = context.getBean(PeopleService.class);
     }
+    @Test
+    public void testQueryAnnotation1(){
+        //peopleRepository.updatePeopleEmail(1, "aa@mage.com");
+        peopleService.update(1, "aa@mage.com");
 
+    }
 
     @Test
     public void testQueryAnnotation(){
