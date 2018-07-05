@@ -1,5 +1,6 @@
 package com.mamh.jpa.springdata;
 
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
@@ -9,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 //@RepositoryDefinition(domainClass = People.class, idClass = Integer.class)
-public interface PeopleRepository extends Repository<People, Integer> {
+public interface PeopleRepository extends Repository<People, Integer>,JpaSpecificationExecutor {
 
     /**
      * 通过last name获取people对象
