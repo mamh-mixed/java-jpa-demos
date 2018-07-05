@@ -2,7 +2,7 @@ package com.mamh.jpa;
 
 import com.mamh.jpa.service.PeopleService;
 import com.mamh.jpa.springdata.People;
-import com.mamh.jpa.springdata.PeopleCrudRepository;
+import com.mamh.jpa.springdata.PeopleJpaRepository;
 import com.mamh.jpa.springdata.PeoplePagingAndSortingRepository;
 import com.mamh.jpa.springdata.PeopleRepository;
 import org.junit.Before;
@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SpringDataTest {
@@ -22,16 +23,33 @@ public class SpringDataTest {
     private ApplicationContext context = null;
     private PeopleRepository peopleRepository;
     private PeopleService peopleService;
-    private PeopleCrudRepository peopleCrudRepository;
     private PeoplePagingAndSortingRepository peoplePagingAndSortingRepository;
+    private PeopleJpaRepository peopleJpaRepository;
 
     @Before
     public void init() {
         context = new ClassPathXmlApplicationContext("spring.xml");
         peopleRepository = context.getBean(PeopleRepository.class);
-        peopleService = context.getBean(PeopleService.class);
-        peopleCrudRepository = context.getBean(PeopleCrudRepository.class);
         peoplePagingAndSortingRepository = context.getBean(PeoplePagingAndSortingRepository.class);
+        peopleJpaRepository = context.getBean(PeopleJpaRepository.class);
+
+        peopleService = context.getBean(PeopleService.class);
+
+    }
+
+    @Test
+    public void testJpaRepository() {
+        People people = new People();
+        people.setLastName("xyz");
+        people.setEmail("xy@mage.com");
+        people.setBirth(new Date());
+        //people.setId(27);
+
+
+        People people1 = peopleJpaRepository.saveAndFlush(people);
+
+        System.out.println(people == people1);
+
     }
 
     @Test
