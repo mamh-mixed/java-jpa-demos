@@ -3,11 +3,15 @@ package com.mamh.jpa;
 import com.mamh.jpa.service.PeopleService;
 import com.mamh.jpa.springdata.People;
 import com.mamh.jpa.springdata.PeopleCrudRepository;
+import com.mamh.jpa.springdata.PeoplePagingAndSortingRepository;
 import com.mamh.jpa.springdata.PeopleRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -19,6 +23,7 @@ public class SpringDataTest {
     private PeopleRepository peopleRepository;
     private PeopleService peopleService;
     private PeopleCrudRepository peopleCrudRepository;
+    private PeoplePagingAndSortingRepository peoplePagingAndSortingRepository;
 
     @Before
     public void init() {
@@ -26,7 +31,42 @@ public class SpringDataTest {
         peopleRepository = context.getBean(PeopleRepository.class);
         peopleService = context.getBean(PeopleService.class);
         peopleCrudRepository = context.getBean(PeopleCrudRepository.class);
+        peoplePagingAndSortingRepository = context.getBean(PeoplePagingAndSortingRepository.class);
     }
+
+    @Test
+    public void testSorting() {
+        int pageNo = 2 - 1;
+        int pageSize = 5;
+        Sort.Order order1 = new Sort.Order(Sort.Direction.ASC, "id");
+        Sort.Order order2 = new Sort.Order(Sort.Direction.DESC, "email");
+        Sort sort = Sort.by(order1, order2);
+
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize, sort);
+        Page<People> page = peoplePagingAndSortingRepository.findAll(pageRequest);
+
+        System.out.println("总记录数： " + page.getTotalElements());
+        System.out.println("当前第几页： " + (page.getNumber() + 1));
+        System.out.println("当前页面的list： " + page.getContent());
+        System.out.println("当前页面的记录数： " + page.getNumberOfElements());
+
+    }
+
+    @Test
+    public void testPageing() {
+        int pageNo = 1 - 1;
+        int pageSize = 5;
+
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+        Page<People> page = peoplePagingAndSortingRepository.findAll(pageRequest);
+
+        System.out.println("总记录数： " + page.getTotalElements());
+        System.out.println("当前第几页： " + (page.getNumber() + 1));
+        System.out.println("当前页面的list： " + page.getContent());
+        System.out.println("当前页面的记录数： " + page.getNumberOfElements());
+
+    }
+
 
     @Test
     public void testQueryAnnotation1() {
